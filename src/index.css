@@ -1,0 +1,44 @@
+:root {
+  --bg: #faf5ed;
+  --card: #fffef9;
+  --border: #e8d5c4;
+  --text: #5c4b3e;
+  --muted: #b8a99a;
+  --accent: #e8988a;
+  --accent2: #7eb8a0;
+  --danger: #d4887a;
+  --warning: #e8c98b;
+  --success: #7eb8a0;
+  --underweight: #8bb8d6;
+  --normal: #7eb8a0;
+  --overweight: #e8c98b;
+  --obese: #e8988a;
+  --tape-pink: rgba(232, 152, 138, 0.35);
+  --tape-green: rgba(126, 184, 160, 0.35);
+  --tape-yellow: rgba(232, 201, 139, 0.40);
+  --tape-blue: rgba(139, 184, 214, 0.35);
+  --font-journal: 'ZCOOL QingKe HuangYou', cursive;
+  --shadow-soft: 0 2px 8px rgba(92, 75, 62, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, 'Segoe UI', -apple-system, sans-serif;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle, #e8d5c4 1px, transparent 1px);
+  background-size: 20px 20px;
+  color: var(--text);
+  min-height: 100vh;
+}
+
+#root {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
