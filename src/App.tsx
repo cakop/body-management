@@ -3,6 +3,7 @@ import type { WeightRecord, ExerciseEntry, BMIResult, TabType } from './types';
 import BMICalculator from './components/BMICalculator';
 import ExercisePlanner from './components/ExercisePlanner';
 import FoodDatabase from './components/FoodDatabase';
+import ExerciseDatabase from './components/ExerciseDatabase';
 import Recommendations from './components/Recommendations';
 import './App.css';
 
@@ -65,6 +66,9 @@ export default function App() {
         <button className={`tab${activeTab === 'foods' ? ' active' : ''}`} onClick={() => setActiveTab('foods')}>
           食材库
         </button>
+        <button className={`tab${activeTab === 'exercises' ? ' active' : ''}`} onClick={() => setActiveTab('exercises')}>
+          运动库
+        </button>
       </div>
 
       {activeTab === 'bmi' && (
@@ -78,6 +82,9 @@ export default function App() {
       )}
       {activeTab === 'foods' && (
         <FoodDatabase />
+      )}
+      {activeTab === 'exercises' && (
+        <ExerciseDatabase />
       )}
     </>
   );

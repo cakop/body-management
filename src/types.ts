@@ -54,4 +54,15 @@ export interface FoodItem {
   nutrients: string[];
 }
 
-export type TabType = 'bmi' | 'tracker' | 'recommendations' | 'foods';
+export interface ExerciseInfo {
+  id: string;
+  name: string;
+  type: string;
+  calories: number;
+  difficulty: string;
+  target: string;
+  method: string;
+  tips: string;
+}
+
+export type TabType = 'bmi' | 'tracker' | 'recommendations' | 'foods' | 'exercises';
