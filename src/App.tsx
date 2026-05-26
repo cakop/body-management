@@ -1,36 +1,37 @@
-import { useState, useCallback } from 'react';
-import type { WeightRecord, BMIResult, TabType } from './types';
+import { useState } from 'react';
+import type { WeightRecord, ExerciseEntry, BMIResult, TabType } from './types';
 import BMICalculator from './components/BMICalculator';
-import WeightTracker from './components/WeightTracker';
+import ExercisePlanner from './components/ExercisePlanner';
 import Recommendations from './components/Recommendations';
 import './App.css';
 
-const STORAGE_KEY = 'body_records';
+const WEIGHT_KEY = 'body_records';
+const EXERCISE_KEY = 'exercise_plan';
 
-function loadRecords(): WeightRecord[] {
+function loadJSON<T>(key: string, fallback: T): T {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : [];
-  } catch { return []; }
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch { return fallback; }
 }
 
-function saveRecords(records: WeightRecord[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+function saveJSON(key: string, data: unknown) {
+  localStorage.setItem(key, JSON.stringify(data));
 }
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabType>('bmi');
-  const [records, setRecords] = useState<WeightRecord[]>(loadRecords);
+  const [, setRecords] = useState<WeightRecord[]>(() => loadJSON(WEIGHT_KEY, []));
+  const [exercises, setExercises] = useState<ExerciseEntry[]>(() => loadJSON(EXERCISE_KEY, []));
   const [lastBMI, setLastBMI] = useState<BMIResult | null>(null);
 
-  const handleRecordsChange = useCallback((next: WeightRecord[]) => {
-    setRecords(next);
-    saveRecords(next);
-  }, []);
+  const handleExercisesChange = (next: ExerciseEntry[]) => {
+    setExercises(next);
+    saveJSON(EXERCISE_KEY, next);
+  };
 
-  const handleBMICalculate = useCallback((result: BMIResult) => {
+  const handleBMICalculate = (result: BMIResult) => {
     setLastBMI(result);
-    // Auto-save today's weight
     const today = new Date().toISOString().split('T')[0];
     setRecords(prev => {
       const copy = [...prev];
@@ -38,10 +39,10 @@ export default function App() {
       if (idx >= 0) copy[idx].weight = result.weight;
       else copy.push({ date: today, weight: result.weight });
       copy.sort((a, b) => a.date.localeCompare(b.date));
-      saveRecords(copy);
+      saveJSON(WEIGHT_KEY, copy);
       return copy;
     });
-  }, []);
+  };
 
   return (
     <>
@@ -55,7 +56,7 @@ export default function App() {
           BMI 计算器
         </button>
         <button className={`tab${activeTab === 'tracker' ? ' active' : ''}`} onClick={() => setActiveTab('tracker')}>
-          体重追踪
+          运动计划
         </button>
         <button className={`tab${activeTab === 'recommendations' ? ' active' : ''}`} onClick={() => setActiveTab('recommendations')}>
           健康建议
@@ -66,7 +67,7 @@ export default function App() {
         <BMICalculator onCalculate={handleBMICalculate} lastBMI={lastBMI} />
       )}
       {activeTab === 'tracker' && (
-        <WeightTracker records={records} onRecordsChange={handleRecordsChange} />
+        <ExercisePlanner entries={exercises} onEntriesChange={handleExercisesChange} />
       )}
       {activeTab === 'recommendations' && (
         <Recommendations bmiResult={lastBMI} />

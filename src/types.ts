@@ -32,4 +32,14 @@ export interface AIPlan {
   meal_plan: AIMealTask[];
 }
 
+export interface ExerciseEntry {
+  id: string;
+  day: string;
+  name: string;
+  type: string;
+  duration: string;
+  notes: string;
+  completed: boolean;
+}
+
 export type TabType = 'bmi' | 'tracker' | 'recommendations';
