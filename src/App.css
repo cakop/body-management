@@ -659,6 +659,137 @@ header p {
   line-height: 1.4;
 }
 
+/* ===== Food Database ===== */
+.food-search-bar {
+  margin-bottom: 12px;
+}
+.food-search-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: none;
+  border-bottom: 2px dotted var(--border);
+  background: transparent;
+  font-size: 0.95rem;
+  color: var(--text);
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+.food-search-input:focus {
+  border-bottom-color: var(--accent);
+}
+.food-search-input::placeholder {
+  color: var(--muted);
+}
+
+.food-cat-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.food-cat-chip {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: transparent;
+  font-size: 0.85rem;
+  font-family: var(--font-journal);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.food-cat-chip.active {
+  font-weight: 700;
+}
+.food-cat-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.food-card {
+  background: #fffef9;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+}
+.food-card::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 16px;
+  width: 50px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--tape-pink);
+  transform: rotate(-3deg);
+  opacity: 0.5;
+}
+
+.food-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.food-name {
+  font-family: var(--font-journal);
+  font-size: 1rem;
+  letter-spacing: 1px;
+  color: var(--text);
+}
+.food-cat-tag {
+  font-size: 0.7rem;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-family: var(--font-journal);
+}
+
+.food-macros {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+.macro-item {
+  text-align: center;
+  min-width: 48px;
+}
+.macro-val {
+  display: block;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--accent);
+}
+.macro-label {
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+.food-nutrients {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.nutrient-tag {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 8px;
+  background: rgba(126, 184, 160, 0.1);
+  color: var(--accent2);
+  font-family: var(--font-journal);
+  letter-spacing: 0.5px;
+}
+
 /* ===== Shared ===== */
 .empty-state {
   text-align: center;

@@ -42,4 +42,16 @@ export interface ExerciseEntry {
   completed: boolean;
 }
 
-export type TabType = 'bmi' | 'tracker' | 'recommendations';
+export interface FoodItem {
+  id: string;
+  name: string;
+  category: string;
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+  fiber: number;
+  nutrients: string[];
+}
+
+export type TabType = 'bmi' | 'tracker' | 'recommendations' | 'foods';
